@@ -91,12 +91,13 @@ We can remove the connection check if we dealing with large numbers of servers a
 
 ## Step 4: Create and run playbook
 
-Ansible requires minimum of 2 files, a host file and at least one play book.
-
 We create the play book **my-playbook.yaml** and the shell script file **nice-script.sh** that list all mounted filesystems in the configuraton-management directory.
 ![Screenshot 2023-06-04 at 3 59 30 PM](https://github.com/kurlinz/python-app/assets/123019485/725799ef-3590-4ee2-9a2a-ae672c562a3e)
 
-After creating playbook which can be referenced in the repository, we simply run with the cmd
+Ansible requires minimum of 2 files, a host file and at least one play book. This playbook helps us define what task we want to execute and on which host. Ansible playbook is written in yaml format. A playbook can have multiple plays. A play is a like a task that we are telling ansible to perform, and a playbook is a collection of these plays. Every play can have a name, its optional but recommended. Every play has to have a host, i.e which server from your inventory we want to target. You can provide a specific server or a group name like we would be doing in this project. Task are list of commands or things we want to execute on the selected host which would be represented by a module. A module is like one specific command we would be executing. Ansible playbook is executed one command at a time.
+![Screenshot 2023-06-04 at 4 27 09 PM](https://github.com/kurlinz/python-app/assets/123019485/70bbd5a2-6b98-4561-84d1-12de8cb5f469)
+
+After creating playbook which can be referenced in the repository, we simply run with the cmd, running the command we pass in the **hosts** file and **Ansible playbook**
 ```
       ansible-playbook -i hosts my-playbook.yaml
 ```
