@@ -31,3 +31,15 @@ local host machine public keyn ia already registered in server from key genarati
 
 Or we can disbale the ssh key check all together. most preferably for ephemeral infrastructure ( servers that are dynamically created and destroyed)
 
+create ansible config file in ~/.ansible.cfg and set host_key_checking = false on the host machine for a large of infrastructure
+
+
+
+
+
+
+
+
+
+
+
