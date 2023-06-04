@@ -22,7 +22,7 @@
 2. Provision the linux service to be configured on aws
 3. Configure ansible to connect to server ( Create hosts file)
 4. Create playbook
-5. Run Playbook and push to git repository
+5. Run Playbook 
 
 ## Requirements
 1. VS code
@@ -89,7 +89,7 @@ We can remove the connection check if we dealing with large numbers of servers a
 * we can disbale the ssh key check all together, most preferably for ephemeral infrastructure ( servers that are dynamically created and destroyed), create ansible config file in **~/.ansible.cfg** or working directory and set **host_key_checking = false** on the host machine for a large number of infrastructure
 
 
-## Step 4: Create playbook
+## Step 4: Create and run playbook
 
 Ansible requires minimum of 2 files, a host file and at least one play book.
 
