@@ -1,0 +1,53 @@
+- name: Configure new user and install packages
+  hosts: ec2
+  become: yes
+
+  tasks:
+    - name: Create home directory for new user
+      file:
+        path: /better-place
+        state: directory
+      become: yes
+
+    - name: Create user "john"
+      user:
+        name: john
+        home: /better-place/john
+        uid: 1234
+        createhome: yes
+      become: yes
+
+    - name: Copy nice-script.sh to user's home directory
+      copy:
+        src: ./nice-script.sh
+        dest: /better-place/john/nice-script.sh
+        owner: john
+        group: john
+        mode: 0755
+      become: yes
+
+    - name: Allow user "john" to run "whoami" with sudo without password
+      lineinfile:
+        dest: /etc/sudoers
+        line: "john ALL=(ALL) NOPASSWD: /usr/bin/whoami"
+        validate: visudo -cf %s
+        state: present
+      become: yes
+
+    - name: Install packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      become: yes
+      loop:
+        - tmux
+        - vim
+
+    - name: install terraform
+      shell:
+        cmd: "{{ item }}"
+      loop: 
+        - wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        - echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list 
+        - sudo apt update && sudo apt install terraform
+    
