@@ -1,4 +1,4 @@
-# Recruitmemt Assignment: Configuration Management
+# Configuration Management
 
 ## TASK 2: Configure a linux Machine with ansible
 
